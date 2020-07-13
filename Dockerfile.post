@@ -1,0 +1,8 @@
+FROM postgres:alpine
+
+ENV PGDATA=/var/lib/postgresql/data/pgdata
+ENV PG_PORT=5432
+ENV DB_DATABASE=image-gallery
+ENV DB_USER=admin
+ENV DB_PASSWD=1nsecure
+

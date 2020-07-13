@@ -1,0 +1,32 @@
+---
+version: "3"
+
+services:
+  db:
+    image: corki64/post-ig-image:latest
+    user: "root"
+    volumes:
+      - "/home/ec2-user/secrets:/mnt/secrets"
+      - "data:/var/lib/postgresql/data"
+
+  web:
+    image: corki64/image-gallery
+    environment:
+      PG_HOST: "db"
+      PG_PORT: "5432"
+      IG_USER: "postgres"
+      IG_PASSWORD: "firefly"
+      IG_DATABASE: "postgres"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "/home/ec2-user/secrets:/mnt/secrets"
+    depends_on:
+      - "db"
+
+
+
+volumes:
+  data:
+    external: true
